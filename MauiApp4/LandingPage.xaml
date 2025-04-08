@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp4.LandingPage"
+             Title="LandingPage"
+             BackgroundColor="#A855F7"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Barangay Logo and Welcome Message -->
+            <Image Source="sanpedro1.png" WidthRequest="100" HeightRequest="100" HorizontalOptions="Center" />
+            <Label Text="We are here for you"
+                   TextColor="White"
+                   FontSize="18"
+                   HorizontalTextAlignment="Center"/>
+
+            <!-- Top Card with message -->
+            <Frame BackgroundColor="#FF2DD5" CornerRadius="20" Padding="15">
+                <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Label Text="You are not alone. We, The Barangay San Pedro are here for you. Violence against women and children should never be ignored, and no one deserves to suffer in silence. If you or someone you know is experiencing abuse, know that help and support are available. You have the strength within you to rise above the pain, to reclaim your voice, and to build a life free from fear. Together, we can break the cycle, seek justice, and create a safer, brighter future. Speak up, reach out, and remember—there is hope, there is healing, and you are never alone. You deserve to be heard. You deserve to be safe. And most importantly, you deserve to be free."
+               TextColor="White"
+               FontSize="14"
+               HorizontalTextAlignment="Center"/>
+                    <Image Source="sanpedro4.png"
+               HeightRequest="120"
+               HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+
+            <!-- Center Icon -->
+            <Image Source="sanpedro9.png" WidthRequest="280" HeightRequest="280" HorizontalOptions="Center" />
+
+            <!-- Violence Against Women and Children -->
+            <Label Text="Violence Against Women and their Children"
+                   TextColor="White"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" />
+
+            <!-- Middle Card with descriptive message -->
+            <Frame BackgroundColor="#FF2DD5" CornerRadius="20" Padding="15">
+                <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Image Source="sanpedro8.png"
+               HeightRequest="120"
+               HorizontalOptions="Center"/>
+                    <Label Text="The Violence Against Women and their Children (VAWC) platform is a dedicated initiative aimed at combating all forms of abuse and exploitation against women and children. This platform seeks to raise awareness, provide protection, and empower survivors to reclaim their rights and dignity. Through comprehensive support systems, legal assistance, counseling services, and public education, the VAWC platform strives to break the cycle of violence and build safer communities. It emphasizes the importance of speaking out, seeking justice, and fostering a culture of respect and equality where every woman and child can live free from fear and harm."
+               TextColor="White"
+               FontSize="14"
+               HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+
+            <!-- Call to Action -->
+            <Label Text="When you're ready, we're here to listen."
+                   TextColor="White"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" />
+
+            <!-- Buttons -->
+            <Frame BackgroundColor="White" CornerRadius="15" Padding="10" Margin="0,5">
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Image Source="sanpedro10.png" WidthRequest="24" HeightRequest="24"/>
+                    <Label Text="You can File a Complaint" TextColor="Black" FontSize="14" Margin="10,0"/>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="White" CornerRadius="15" Padding="10" Margin="0,5">
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Image Source="sanpedro11.png" WidthRequest="24" HeightRequest="24"/>
+                    <Label Text="You can Call for Help" TextColor="Black" FontSize="14" Margin="10,0"/>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <!-- Footer Text -->
+            <Label Text="Everyone Deserves Kindness, Care, and Compassion"
+                   TextColor="White"
+                   FontSize="14"
+                   HorizontalTextAlignment="Center"/>
+
+            <!-- Floral Bottom Image -->
+            <Image Source="sanpedro12.png" HeightRequest="100" HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

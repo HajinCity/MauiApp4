@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp4.SplashScreen"
+             Title="SplashScreen"
+             BackgroundColor="White"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Image Source="sanpedro1.png"
+               WidthRequest="200"
+               HeightRequest="200"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+
+        <Label Text="BARANGAY SAN PEDRO&#10;PAGADIAN CITY"
+               FontAttributes="Bold"
+               HorizontalTextAlignment="Center"
+               Margin="0,20,0,0"
+               FontSize="18"
+               TextColor="Black"/>
+    </VerticalStackLayout>
+</ContentPage>
