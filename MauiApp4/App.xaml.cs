@@ -5,6 +5,8 @@
         public App()
         {
             InitializeComponent();
+            Routing.RegisterRoute(nameof(FilingOfComplaint), typeof(FilingOfComplaint));
+
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
