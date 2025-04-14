@@ -10,7 +10,8 @@ public partial class SplashScreen : ContentPage
     {
         base.OnAppearing();
         await Task.Delay(3000); // waits for 3 seconds
-        Application.Current.MainPage = new LandingPage(); // navigate to Landing Page
+     
+        await Shell.Current.GoToAsync(nameof(LandingPage));
     }
 
 }

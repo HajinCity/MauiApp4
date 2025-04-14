@@ -55,7 +55,8 @@
                 </VerticalStackLayout>
             </Frame>
 
-
+           
+            
             <!-- Call to Action -->
             <Label Text="When you're ready, we're here to listen."
                    TextColor="White"
@@ -63,13 +64,21 @@
                    FontAttributes="Bold"
                    HorizontalTextAlignment="Center" />
 
+        
+
             <!-- Buttons -->
             <Frame BackgroundColor="White" CornerRadius="15" Padding="10" Margin="0,5">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnFileComplaintTapped" />
+                </Frame.GestureRecognizers>
                 <HorizontalStackLayout HorizontalOptions="Center">
                     <Image Source="sanpedro10.png" WidthRequest="24" HeightRequest="24"/>
                     <Label Text="You can File a Complaint" TextColor="Black" FontSize="14" Margin="10,0"/>
                 </HorizontalStackLayout>
             </Frame>
+
+
+
 
             <Frame BackgroundColor="White" CornerRadius="15" Padding="10" Margin="0,5">
                 <HorizontalStackLayout HorizontalOptions="Center">
@@ -85,7 +94,7 @@
                    HorizontalTextAlignment="Center"/>
 
             <!-- Floral Bottom Image -->
-            <Image Source="sanpedro12.png" HeightRequest="100" HorizontalOptions="Center" />
+            <Image Source="sanpedro12.png" HeightRequest="150" HorizontalOptions="Center" />
 
         </VerticalStackLayout>
     </ScrollView>
