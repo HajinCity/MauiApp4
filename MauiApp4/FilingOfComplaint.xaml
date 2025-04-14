@@ -11,41 +11,56 @@
 
             <!-- Header -->
             <Button Text="File Your Complaint"
-                BackgroundColor="#FF2DD5"
-                TextColor="White"
-                FontAttributes="Bold"
-                CornerRadius="10" />
+                    BackgroundColor="#FF2DD5"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="10" />
 
             <!-- Complainant Section -->
             <Label Text="Complainant" FontAttributes="Bold" />
 
-            <Entry Placeholder="Your Last Name" />
-            <Entry Placeholder="Your First Name" />
-            <Entry Placeholder="Your Middle Name" />
+            <Entry x:Name="LastNameEntry" Placeholder="Your Last Name" />
+            <Entry x:Name="FirstNameEntry" Placeholder="Your First Name" />
+            <Entry x:Name="MiddleNameEntry" Placeholder="Your Middle Name" />
 
             <!-- Sex -->
             <Label Text="Sex" />
             <HorizontalStackLayout>
-                <RadioButton Content="Male" GroupName="SexGroup" />
-                <RadioButton Content="Female" GroupName="SexGroup" />
+                <RadioButton x:Name="MaleRadio" Content="Male" GroupName="SexGroup" />
+                <RadioButton x:Name="FemaleRadio" Content="Female" GroupName="SexGroup" />
             </HorizontalStackLayout>
 
-            <Entry Placeholder="Contact No." />
-            <Entry Placeholder="San Pedro Pagadian City" />
-            <Entry Placeholder="Purok" />
+            <Entry x:Name="ContactEntry" Placeholder="Contact No." />
+            <Entry x:Name="CityEntry" Placeholder="San Pedro Pagadian City" />
+            <Entry x:Name="PurokEntry" Placeholder="Purok" />
 
             <!-- Respondent Details -->
             <Label Text="Respondent Details" FontAttributes="Bold" />
 
-            <Entry Placeholder="Last Name" />
-            <Entry Placeholder="First Name" />
-            <Entry Placeholder="Middle Name" />
-            <Entry Placeholder="Relationship to Complainant" />
+            <Entry x:Name="RespLastNameEntry" Placeholder="Last Name" />
+            <Entry x:Name="RespFirstNameEntry" Placeholder="First Name" />
+            <Entry x:Name="RespMiddleNameEntry" Placeholder="Middle Name" />
+            <Entry x:Name="RelationshipEntry" Placeholder="Relationship to Complainant" />
 
             <!-- Complaint Details -->
             <Label Text="Complaint Details" FontAttributes="Bold" />
-            <Editor HeightRequest="100" Placeholder="Enter details here..." BackgroundColor="#E0E0E0" />
+            <Editor x:Name="ComplaintDetailsEditor"
+                    HeightRequest="100"
+                    Placeholder="Enter details here..."
+                    BackgroundColor="#E0E0E0" />
 
+            <!-- Buttons -->
+            <Button Text="File Now"
+                    Clicked="OnFileNowClicked"
+                    BackgroundColor="#4CAF50"
+                    TextColor="White"
+                    CornerRadius="10" />
+
+            <Button Text="Cancel"
+                    Clicked="OnCancelClicked"
+                    BackgroundColor="#F44336"
+                    TextColor="White"
+                    CornerRadius="10" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
