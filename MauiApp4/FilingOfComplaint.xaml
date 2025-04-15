@@ -32,7 +32,27 @@
 
             <Entry x:Name="ContactEntry" Placeholder="Contact No." />
             <Entry x:Name="CityEntry" Placeholder="San Pedro Pagadian City" />
-            <Entry x:Name="PurokEntry" Placeholder="Purok" />
+
+            <!-- Purok Picker -->
+            <Label Text="Purok" />
+            <Picker x:Name="PurokEntry" Title="Select Purok">
+                <Picker.Items>
+                    <x:String>Purok 1</x:String>
+                    <x:String>Purok 2</x:String>
+                    <x:String>Purok 3</x:String>
+                    <x:String>Purok 4</x:String>
+                    <x:String>Purok 5</x:String>
+                    <x:String>Purok 6</x:String>
+                    <x:String>Purok 7</x:String>
+                    <x:String>Purok 8</x:String>
+                    <x:String>Purok 9</x:String>
+                    <x:String>Purok 10</x:String>
+                    <x:String>Purok 11</x:String>
+                    <x:String>Purok 12</x:String>
+                    <x:String>Purok 13</x:String>
+                    <x:String>Purok 14</x:String>
+                </Picker.Items>
+            </Picker>
 
             <!-- Respondent Details -->
             <Label Text="Respondent Details" FontAttributes="Bold" />
@@ -40,7 +60,31 @@
             <Entry x:Name="RespLastNameEntry" Placeholder="Last Name" />
             <Entry x:Name="RespFirstNameEntry" Placeholder="First Name" />
             <Entry x:Name="RespMiddleNameEntry" Placeholder="Middle Name" />
-            <Entry x:Name="RelationshipEntry" Placeholder="Relationship to Complainant" />
+
+            <!-- Relationship Picker -->
+            <Label Text="Relationship to Complainant" />
+            <Picker x:Name="RelationshipEntry" 
+                    Title="Select Relationship">
+                <Picker.Items>
+                    <x:String>Current Spouse/Partner</x:String>
+                    <x:String>Former Fiance/Dating Relationship</x:String>
+                    <x:String>Teacher/Instructor/Professor</x:String>
+                    <x:String>Neighbors/Peers/Co-Workers/Classmates</x:String>
+                    <x:String>Former Spouse/Partner</x:String>
+                    <x:String>Employer/Manager/Supervisor</x:String>
+                    <x:String>Coach/Trainer</x:String>
+                    <x:String>Stranger</x:String>
+                    <x:String>Current Fiance/Dating Relationship</x:String>
+                    <x:String>Agent of the Employer</x:String>
+                    <x:String>People of Authority/Service Provider</x:String>
+                    <x:String>Family</x:String>
+                    <x:String>Other Relatives</x:String>
+                    <x:String>Other (please specify)</x:String>
+                </Picker.Items>
+            </Picker>
+            <Entry x:Name="OtherRelationshipEntry" 
+                   Placeholder="Specify relationship" 
+                   IsVisible="False"/>
 
             <!-- Complaint Details -->
             <Label Text="Complaint Details" FontAttributes="Bold" />
