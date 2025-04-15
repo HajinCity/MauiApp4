@@ -13,6 +13,7 @@ namespace MauiApp4
         public FilingOfComplaint()
         {
             InitializeComponent();
+            RelationshipEntry.SelectedIndexChanged += OnRelationshipSelected;
         }
 
         private async void OnCancelClicked(object sender, EventArgs e)
@@ -46,11 +47,11 @@ namespace MauiApp4
                     Sex = MaleRadio.IsChecked ? "Male" : FemaleRadio.IsChecked ? "Female" : "",
                     Contact = ContactEntry.Text,
                     City = CityEntry.Text,
-                    Purok = PurokEntry.Text,
+                    Purok = PurokEntry.SelectedItem?.ToString() ?? string.Empty,
                     RespLastName = RespLastNameEntry.Text,
                     RespFirstName = RespFirstNameEntry.Text,
                     RespMiddleName = RespMiddleNameEntry.Text,
-                    Relationship = RelationshipEntry.Text,
+                    Relationship = GetRelationship(),
                     ComplaintDetails = ComplaintDetailsEditor.Text,
                     ComplaintDate = DateTime.UtcNow,
                     Status = "Pending"
@@ -61,7 +62,7 @@ namespace MauiApp4
                 if (success)
                 {
                     await DisplayAlert("Success", $"Complaint submitted!\nCase ID: {caseId}", "OK");
-                    ClearForm();
+                    await ClearForm();
                 }
                 else
                 {
@@ -74,40 +75,66 @@ namespace MauiApp4
             }
         }
 
+        private string GetRelationship()
+        {
+            if (RelationshipEntry.SelectedItem?.ToString() == "Other (please specify)")
+            {
+                return OtherRelationshipEntry.Text;
+            }
+            return RelationshipEntry.SelectedItem?.ToString() ?? string.Empty;
+        }
+
+        private void OnRelationshipSelected(object sender, EventArgs e)
+        {
+            OtherRelationshipEntry.IsVisible = RelationshipEntry.SelectedItem?.ToString() == "Other (please specify)";
+        }
+
         private async Task<string> GenerateCaseIDAsync()
         {
-            return $"CFO-{DateTime.UtcNow.Year}-{DateTime.UtcNow:MMddHHmmss}";
+            return await Task.Run(() =>
+            {
+                return $"CFO-{DateTime.UtcNow.Year}-{DateTime.UtcNow:MMddHHmmss}";
+            });
         }
 
         private bool IsFormValid()
         {
-            return
-                !string.IsNullOrWhiteSpace(LastNameEntry.Text) &&
-                !string.IsNullOrWhiteSpace(FirstNameEntry.Text) &&
-                !string.IsNullOrWhiteSpace(ContactEntry.Text) &&
-                !string.IsNullOrWhiteSpace(CityEntry.Text) &&
-                !string.IsNullOrWhiteSpace(PurokEntry.Text) &&
-                !string.IsNullOrWhiteSpace(RespLastNameEntry.Text) &&
-                !string.IsNullOrWhiteSpace(RespFirstNameEntry.Text) &&
-                !string.IsNullOrWhiteSpace(RelationshipEntry.Text) &&
-                !string.IsNullOrWhiteSpace(ComplaintDetailsEditor.Text);
+            return !string.IsNullOrWhiteSpace(LastNameEntry.Text) &&
+                   !string.IsNullOrWhiteSpace(FirstNameEntry.Text) &&
+                   !string.IsNullOrWhiteSpace(ContactEntry.Text) &&
+                   !string.IsNullOrWhiteSpace(CityEntry.Text) &&
+                   PurokEntry.SelectedItem != null &&
+                   !string.IsNullOrWhiteSpace(RespLastNameEntry.Text) &&
+                   !string.IsNullOrWhiteSpace(RespFirstNameEntry.Text) &&
+                   RelationshipEntry.SelectedItem != null &&
+                   (RelationshipEntry.SelectedItem.ToString() != "Other (please specify)" ||
+                    !string.IsNullOrWhiteSpace(OtherRelationshipEntry.Text)) &&
+                   !string.IsNullOrWhiteSpace(ComplaintDetailsEditor.Text);
         }
 
-        private void ClearForm()
+        private async Task ClearForm()
         {
-            LastNameEntry.Text = "";
-            FirstNameEntry.Text = "";
-            MiddleNameEntry.Text = "";
-            ContactEntry.Text = "";
-            CityEntry.Text = "";
-            PurokEntry.Text = "";
-            RespLastNameEntry.Text = "";
-            RespFirstNameEntry.Text = "";
-            RespMiddleNameEntry.Text = "";
-            RelationshipEntry.Text = "";
-            ComplaintDetailsEditor.Text = "";
-            MaleRadio.IsChecked = false;
-            FemaleRadio.IsChecked = false;
+            await Task.Run(() =>
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    LastNameEntry.Text = string.Empty;
+                    FirstNameEntry.Text = string.Empty;
+                    MiddleNameEntry.Text = string.Empty;
+                    ContactEntry.Text = string.Empty;
+                    CityEntry.Text = string.Empty;
+                    PurokEntry.SelectedIndex = -1;
+                    RespLastNameEntry.Text = string.Empty;
+                    RespFirstNameEntry.Text = string.Empty;
+                    RespMiddleNameEntry.Text = string.Empty;
+                    RelationshipEntry.SelectedIndex = -1;
+                    OtherRelationshipEntry.Text = string.Empty;
+                    OtherRelationshipEntry.IsVisible = false;
+                    ComplaintDetailsEditor.Text = string.Empty;
+                    MaleRadio.IsChecked = false;
+                    FemaleRadio.IsChecked = false;
+                });
+            });
         }
     }
 }
