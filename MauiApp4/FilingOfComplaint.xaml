@@ -18,22 +18,20 @@
 
             <!-- Complainant Section -->
             <Label Text="Complainant" FontAttributes="Bold" />
-
             <Entry x:Name="LastNameEntry" Placeholder="Your Last Name" />
             <Entry x:Name="FirstNameEntry" Placeholder="Your First Name" />
             <Entry x:Name="MiddleNameEntry" Placeholder="Your Middle Name" />
 
-            <!-- Sex -->
             <Label Text="Sex" />
             <HorizontalStackLayout>
                 <RadioButton x:Name="MaleRadio" Content="Male" GroupName="SexGroup" />
                 <RadioButton x:Name="FemaleRadio" Content="Female" GroupName="SexGroup" />
             </HorizontalStackLayout>
 
-            <Entry x:Name="ContactEntry" Placeholder="Contact No." />
+            <Entry x:Name="ContactEntry" Placeholder="Contact No." Keyboard="Numeric" />
             <Entry x:Name="CityEntry" Placeholder="San Pedro Pagadian City" />
 
-            <!-- Purok Picker -->
+            <!-- Purok -->
             <Label Text="Purok" />
             <Picker x:Name="PurokEntry" Title="Select Purok">
                 <Picker.Items>
@@ -54,17 +52,68 @@
                 </Picker.Items>
             </Picker>
 
-            <!-- Respondent Details -->
-            <Label Text="Respondent Details" FontAttributes="Bold" />
+            <!-- Additional Complainant Fields -->
+            <!-- Complainant Civil Status Picker -->
+            <Label Text="Civil Status" />
+            <Picker x:Name="CivilStatusEntry" Title="Select Civil Status">
+                <Picker.Items>
+                    <x:String>Single</x:String>
+                    <x:String>Live-in</x:String>
+                    <x:String>Separated</x:String>
+                    <x:String>Married</x:String>
+                    <x:String>Widowed</x:String>
+                    <x:String>Unknown</x:String>
+                </Picker.Items>
+            </Picker>
 
+            <Label Text="Birthdate" />
+            <DatePicker x:Name="BirthdatePicker" />
+            <Entry x:Name="AgeEntry" Placeholder="Age" Keyboard="Numeric" />
+            <Entry x:Name="ReligionEntry" Placeholder="Religion" />
+            <Entry x:Name="NationalityEntry" Placeholder="Nationality" />
+            <Entry x:Name="OccupationEntry" Placeholder="Occupation" />
+
+          
+
+            <!-- Respondent Section -->
+            <Label Text="Respondent Details" FontAttributes="Bold" />
             <Entry x:Name="RespLastNameEntry" Placeholder="Last Name" />
             <Entry x:Name="RespFirstNameEntry" Placeholder="First Name" />
             <Entry x:Name="RespMiddleNameEntry" Placeholder="Middle Name" />
+            <Entry x:Name="RespAliasEntry" Placeholder="Alias" />
 
-            <!-- Relationship Picker -->
+            <Label Text="Sex" />
+            <HorizontalStackLayout>
+                <RadioButton x:Name="RespMaleRadio" Content="Male" GroupName="RespSexGroup" />
+                <RadioButton x:Name="RespFemaleRadio" Content="Female" GroupName="RespSexGroup" />
+            </HorizontalStackLayout>
+
+
+
+            <!-- Respondent Civil Status Picker -->
+            <Label Text="Civil Status" />
+            <Picker x:Name="RespCivilStatusEntry" Title="Select Civil Status">
+                <Picker.Items>
+                    <x:String>Single</x:String>
+                    <x:String>Live-in</x:String>
+                    <x:String>Separated</x:String>
+                    <x:String>Married</x:String>
+                    <x:String>Widowed</x:String>
+                    <x:String>Unknown</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Label Text="Birthdate" />
+            <DatePicker x:Name="RespBirthdatePicker" />
+            <Entry x:Name="RespAgeEntry" Placeholder="Age" Keyboard="Numeric" />
+            <Entry x:Name="RespReligionEntry" Placeholder="Religion" />
+            <Entry x:Name="RespContactEntry" Placeholder="Contact No." Keyboard="Numeric"/>
+            <Entry x:Name="RespNationalityEntry" Placeholder="Nationality" />
+            <Entry x:Name="RespOccupationEntry" Placeholder="Occupation" />
+
+            <!-- Relationship -->
             <Label Text="Relationship to Complainant" />
-            <Picker x:Name="RelationshipEntry" 
-                    Title="Select Relationship">
+            <Picker x:Name="RelationshipEntry" Title="Select Relationship">
                 <Picker.Items>
                     <x:String>Current Spouse/Partner</x:String>
                     <x:String>Former Fiance/Dating Relationship</x:String>
@@ -82,29 +131,15 @@
                     <x:String>Other (please specify)</x:String>
                 </Picker.Items>
             </Picker>
-            <Entry x:Name="OtherRelationshipEntry" 
-                   Placeholder="Specify relationship" 
-                   IsVisible="False"/>
+            <Entry x:Name="OtherRelationshipEntry" Placeholder="Specify relationship" IsVisible="False" />
 
             <!-- Complaint Details -->
             <Label Text="Complaint Details" FontAttributes="Bold" />
-            <Editor x:Name="ComplaintDetailsEditor"
-                    HeightRequest="100"
-                    Placeholder="Enter details here..."
-                    BackgroundColor="#E0E0E0" />
+            <Editor x:Name="ComplaintDetailsEditor" HeightRequest="100" Placeholder="Enter details here..." BackgroundColor="#E0E0E0" />
 
             <!-- Buttons -->
-            <Button Text="File Now"
-                    Clicked="OnFileNowClicked"
-                    BackgroundColor="#4CAF50"
-                    TextColor="White"
-                    CornerRadius="10" />
-
-            <Button Text="Cancel"
-                    Clicked="OnCancelClicked"
-                    BackgroundColor="#F44336"
-                    TextColor="White"
-                    CornerRadius="10" />
+            <Button Text="File Now" Clicked="OnFileNowClicked" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="10" />
+            <Button Text="Cancel" Clicked="OnCancelClicked" BackgroundColor="#F44336" TextColor="White" CornerRadius="10" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

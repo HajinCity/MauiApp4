@@ -1,14 +1,15 @@
 using MauiApp4.Models;
 using MauiApp4.Services;
+using Microsoft.Maui.Controls;
 using System;
 using System.Threading.Tasks;
-using Microsoft.Maui.Controls;
 
 namespace MauiApp4
 {
     public partial class FilingOfComplaint : ContentPage
     {
         private readonly FirestoreService _firestoreService = new();
+
 
         public FilingOfComplaint()
         {
@@ -41,20 +42,71 @@ namespace MauiApp4
                 var complaint = new Complaint
                 {
                     CaseID = caseId,
-                    LastName = LastNameEntry.Text,
-                    FirstName = FirstNameEntry.Text,
-                    MiddleName = MiddleNameEntry.Text,
-                    Sex = MaleRadio.IsChecked ? "Male" : FemaleRadio.IsChecked ? "Female" : "",
-                    Contact = ContactEntry.Text,
-                    City = CityEntry.Text,
-                    Purok = PurokEntry.SelectedItem?.ToString() ?? string.Empty,
-                    RespLastName = RespLastNameEntry.Text,
-                    RespFirstName = RespFirstNameEntry.Text,
-                    RespMiddleName = RespMiddleNameEntry.Text,
-                    Relationship = GetRelationship(),
-                    ComplaintDetails = ComplaintDetailsEditor.Text,
-                    ComplaintDate = DateTime.UtcNow,
-                    Status = "Pending"
+                    Complainant = new ComplainantDetails
+                    {
+                        LastName = LastNameEntry.Text,
+                        FirstName = FirstNameEntry.Text,
+                        MiddleName = MiddleNameEntry.Text,
+                        SexIdentification = MaleRadio.IsChecked ? "Male" : FemaleRadio.IsChecked ? "Female" : "",
+                        CivilStatus = CivilStatusEntry.SelectedItem?.ToString() ?? "",
+                        Birthdate = BirthdatePicker.Date.ToString("yyyy-MM-dd"),
+                        Age = AgeEntry.Text,
+                        Religion = ReligionEntry.Text,
+                        CellNumber = ContactEntry.Text,
+                        Nationality = NationalityEntry.Text,
+                        Occupation = OccupationEntry.Text,
+                        Address = new Address
+                        {
+                            Purok = PurokEntry.SelectedItem?.ToString(),
+                            Barangay = "San Pedro",
+                            Municipality = CityEntry.Text,
+                            Province = "Zamboanga Del Sur",
+                            Region = "IX"
+                        }
+                    },
+                    Respondent = new RespondentDetails
+                    {
+                        LastName = RespLastNameEntry.Text,
+                        FirstName = RespFirstNameEntry.Text,
+                        MiddleName = RespMiddleNameEntry.Text,
+                        Alias = RespAliasEntry.Text,
+                        SexIdentification = RespMaleRadio.IsChecked ? "Male" : RespFemaleRadio.IsChecked ? "Female" : "",
+                        CivilStatus = RespCivilStatusEntry.SelectedItem?.ToString() ?? "",
+                        Birthdate = RespBirthdatePicker.Date.ToString("yyyy-MM-dd"),
+                        Age = RespAgeEntry.Text,
+                        Religion = RespReligionEntry.Text,
+                        CellNumber = RespContactEntry.Text,
+                        Nationality = RespNationalityEntry.Text,
+                        Occupation = RespOccupationEntry.Text,
+                        RelationshipToComplainant = GetRelationship(),
+                        Address = new Address
+                        {
+                            Purok = "N/A",
+                            Barangay = "N/A",
+                            Municipality = "N/A",
+                            Province = "N/A",
+                            Region = "N/A"
+                        }
+                    },
+                    CaseDetails = new CaseDetails
+                    {
+                        CaseNumber = caseId,
+                        ComplaintDate = DateTime.UtcNow.ToString("yyyy-MM-dd-tt"),
+                        VAWCCase = "N/A",
+                        SubCase = "N/A",
+                        CaseStatus = "Pending",
+                        ReferredTo = "N/A",
+                        IncidentDate = "N/A",
+                        IncidentDescription = ComplaintDetailsEditor.Text,
+                        PlaceOfIncident = new Address
+                        {
+                            Purok = "N/A",
+                            Barangay = "N/A",
+                            Municipality = "N/A",
+                            Province = "N/A",
+                            Region = "N/A"
+                        }
+                    }
                 };
 
                 bool success = await _firestoreService.SubmitComplaintAsync(complaint);
@@ -77,14 +129,12 @@ namespace MauiApp4
 
         private string GetRelationship()
         {
-            if (RelationshipEntry.SelectedItem?.ToString() == "Other (please specify)")
-            {
-                return OtherRelationshipEntry.Text;
-            }
-            return RelationshipEntry.SelectedItem?.ToString() ?? string.Empty;
+            return RelationshipEntry.SelectedItem?.ToString() == "Other (please specify)"
+                ? OtherRelationshipEntry.Text
+                : RelationshipEntry.SelectedItem?.ToString() ?? string.Empty;
         }
 
-        private void OnRelationshipSelected(object sender, EventArgs e)
+        private void OnRelationshipSelected(object? sender, EventArgs e)
         {
             OtherRelationshipEntry.IsVisible = RelationshipEntry.SelectedItem?.ToString() == "Other (please specify)";
         }
@@ -116,23 +166,31 @@ namespace MauiApp4
         {
             await Task.Run(() =>
             {
-                Device.BeginInvokeOnMainThread(() =>
+                Dispatcher.Dispatch(() =>
                 {
-                    LastNameEntry.Text = string.Empty;
-                    FirstNameEntry.Text = string.Empty;
-                    MiddleNameEntry.Text = string.Empty;
-                    ContactEntry.Text = string.Empty;
-                    CityEntry.Text = string.Empty;
+                    // Complainant
+                    LastNameEntry.Text = FirstNameEntry.Text = MiddleNameEntry.Text = "";
+                    ContactEntry.Text = CityEntry.Text = "";
+                    CivilStatusEntry.SelectedIndex = -1;
+                    BirthdatePicker.Date = DateTime.Today;
+                    AgeEntry.Text = ReligionEntry.Text = NationalityEntry.Text = OccupationEntry.Text = "";
                     PurokEntry.SelectedIndex = -1;
-                    RespLastNameEntry.Text = string.Empty;
-                    RespFirstNameEntry.Text = string.Empty;
-                    RespMiddleNameEntry.Text = string.Empty;
-                    RelationshipEntry.SelectedIndex = -1;
-                    OtherRelationshipEntry.Text = string.Empty;
-                    OtherRelationshipEntry.IsVisible = false;
-                    ComplaintDetailsEditor.Text = string.Empty;
                     MaleRadio.IsChecked = false;
                     FemaleRadio.IsChecked = false;
+
+                    // Respondent
+                    RespLastNameEntry.Text = RespFirstNameEntry.Text = RespMiddleNameEntry.Text = RespAliasEntry.Text = "";
+                    RespCivilStatusEntry.SelectedIndex = -1;
+                    RespBirthdatePicker.Date = DateTime.Today;
+                    RespAgeEntry.Text = RespReligionEntry.Text = RespContactEntry.Text = RespNationalityEntry.Text = RespOccupationEntry.Text = "";
+                    RespMaleRadio.IsChecked = false;
+                    RespFemaleRadio.IsChecked = false;
+
+                    // Relationship & Complaint
+                    RelationshipEntry.SelectedIndex = -1;
+                    OtherRelationshipEntry.Text = "";
+                    OtherRelationshipEntry.IsVisible = false;
+                    ComplaintDetailsEditor.Text = "";
                 });
             });
         }
