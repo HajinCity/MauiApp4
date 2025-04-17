@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace MauiApp4.Services
 {
+
     public class FirestoreService
     {
         private readonly HttpClient _httpClient = new();
@@ -113,6 +114,7 @@ namespace MauiApp4.Services
                                     {
                                         fields = new
                                         {
+                                            Place = new { stringValue = complaint.CaseDetails?.PlaceOfIncident?.Place ?? "" },
                                             Purok = new { stringValue = complaint.CaseDetails?.PlaceOfIncident?.Purok ?? "" },
                                             Barangay = new { stringValue = complaint.CaseDetails?.PlaceOfIncident?.Barangay ?? "" },
                                             Municipality = new { stringValue = complaint.CaseDetails?.PlaceOfIncident?.Municipality ?? "" },

@@ -9,8 +9,9 @@ namespace MauiApp4
     public partial class FilingOfComplaint : ContentPage
     {
         private readonly FirestoreService _firestoreService = new();
-
-
+       
+           
+        
         public FilingOfComplaint()
         {
             InitializeComponent();
@@ -57,7 +58,7 @@ namespace MauiApp4
                         Occupation = OccupationEntry.Text,
                         Address = new Address
                         {
-                            Purok = PurokEntry.SelectedItem?.ToString(),
+                            Purok = PurokEntry.SelectedItem?.ToString() ?? "N/A",
                             Barangay = "San Pedro",
                             Municipality = CityEntry.Text,
                             Province = "Zamboanga Del Sur",
@@ -96,15 +97,16 @@ namespace MauiApp4
                         SubCase = "N/A",
                         CaseStatus = "Pending",
                         ReferredTo = "N/A",
-                        IncidentDate = "N/A",
+                        IncidentDate = IncidentDatePicker.Date.ToString("yyyy-MM-dd"),
                         IncidentDescription = ComplaintDetailsEditor.Text,
-                        PlaceOfIncident = new Address
+                        PlaceOfIncident = new IncidentLocation
                         {
-                            Purok = "N/A",
-                            Barangay = "N/A",
-                            Municipality = "N/A",
-                            Province = "N/A",
-                            Region = "N/A"
+                            Place = PlaceOftheIncident.SelectedItem?.ToString() ?? "N/A",
+                            Purok = PIApurok.Text ?? "",
+                            Barangay = PIAbarangay.Text ?? "",
+                            Municipality = PIAmunicipal.Text ?? "",
+                            Province = PIAprovine.Text ?? "",
+                            Region = PIARegion.Text ?? ""
                         }
                     }
                 };
@@ -168,7 +170,7 @@ namespace MauiApp4
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    // Complainant
+                    // Clear complainant fields
                     LastNameEntry.Text = FirstNameEntry.Text = MiddleNameEntry.Text = "";
                     ContactEntry.Text = CityEntry.Text = "";
                     CivilStatusEntry.SelectedIndex = -1;
@@ -178,7 +180,7 @@ namespace MauiApp4
                     MaleRadio.IsChecked = false;
                     FemaleRadio.IsChecked = false;
 
-                    // Respondent
+                    // Clear respondent fields
                     RespLastNameEntry.Text = RespFirstNameEntry.Text = RespMiddleNameEntry.Text = RespAliasEntry.Text = "";
                     RespCivilStatusEntry.SelectedIndex = -1;
                     RespBirthdatePicker.Date = DateTime.Today;
@@ -186,10 +188,16 @@ namespace MauiApp4
                     RespMaleRadio.IsChecked = false;
                     RespFemaleRadio.IsChecked = false;
 
-                    // Relationship & Complaint
+                    // Clear relationship fields
                     RelationshipEntry.SelectedIndex = -1;
                     OtherRelationshipEntry.Text = "";
                     OtherRelationshipEntry.IsVisible = false;
+
+                    // Clear incident details
+                    IncidentDatePicker.Date = DateTime.Today;
+                    PlaceOftheIncident.SelectedIndex = -1;
+                    PIApurok.Text = PIAbarangay.Text = PIAmunicipal.Text =
+                        PIAprovine.Text = PIARegion.Text = "";
                     ComplaintDetailsEditor.Text = "";
                 });
             });

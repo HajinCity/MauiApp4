@@ -52,7 +52,9 @@
         public string? IncidentDate { get; set; }
         public string? IncidentDescription { get; set; }
         public string? CaseNumber { get; set; }
-        public Address? PlaceOfIncident { get; set; }
+
+        // 👇 This now accepts the special version with "Place"
+        public IncidentLocation? PlaceOfIncident { get; set; }
     }
 
     public class Address
@@ -62,5 +64,11 @@
         public string? Municipality { get; set; }
         public string? Province { get; set; }
         public string? Region { get; set; }
+    }
+
+    // ✅ Only used for PlaceOfIncident — adds "Place"
+    public class IncidentLocation : Address
+    {
+        public string? Place { get; set; }
     }
 }

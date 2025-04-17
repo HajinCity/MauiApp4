@@ -132,7 +132,36 @@
                 </Picker.Items>
             </Picker>
             <Entry x:Name="OtherRelationshipEntry" Placeholder="Specify relationship" IsVisible="False" />
+            <Label Text="Complaint Details" />
+            <!-- Incident Date -->
+            <Label Text="Incident Date" />
+            <DatePicker x:Name="IncidentDatePicker" />
 
+            <!-- Place of the Incident -->
+            <Label Text="Place of the Incident" />
+            <Picker x:Name="PlaceOftheIncident" Title="Select Place of Incident">
+                <Picker.Items>
+                    <x:String>Home</x:String>
+                    <x:String>Religious Institutions</x:String>
+                    <x:String>Brothels and Similar Establishments</x:String>
+                    <x:String>Work</x:String>
+                    <x:String>Place of Medical Treatment</x:String>
+                    <x:String>School</x:String>
+                    <x:String>Transportation and Connecting Sites</x:String>
+                    <x:String>Commercial Places</x:String>
+                    <x:String>No Response</x:String>
+                    <x:String>Agent of the Employer</x:String>
+                    <x:String>Others</x:String>
+                </Picker.Items>
+            </Picker>
+            
+            <!-- Place of the Incident Address -->
+            <Label Text="Place of the Incident Address" />
+            <Entry x:Name="PIApurok" Placeholder="Purok" />
+            <Entry x:Name="PIAbarangay" Placeholder="Barangay" />
+            <Entry x:Name="PIAmunicipal" Placeholder="City" />
+            <Entry x:Name="PIAprovine" Placeholder="Province" />
+            <Entry x:Name="PIARegion" Placeholder="Region" />
             <!-- Complaint Details -->
             <Label Text="Complaint Details" FontAttributes="Bold" />
             <Editor x:Name="ComplaintDetailsEditor" HeightRequest="100" Placeholder="Enter details here..." BackgroundColor="#E0E0E0" />
